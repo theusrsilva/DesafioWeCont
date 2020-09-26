@@ -14,6 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::get('/','Api\AuthController@index')->name('index');
+Route::post('/login', 'Api\AuthController@login')->name('login');
+Route::post('/cadastro', 'Api\AuthController@store')->name('cadastro');
+
+Route::middleware(['api.auth'])->group(function (){
+
+    Route::post('/senha', 'Api\AuthController@changePassword')->name('senha');
+    Route::apiResource('/fatura','Api\InvoiceController');
+    Route::post('/info','Api\AuthController@info')->name('info');
+    Route::post('/logout','Api\AuthController@logout')->name('logout');
+
 });
+
+
+
+
+
+
+
