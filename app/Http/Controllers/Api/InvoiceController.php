@@ -91,15 +91,16 @@ class InvoiceController extends Controller
             'value' => 'between:1,9999.99',
             'status' => 'in:aberta,paga,atrasada'
         ]);
-        $invoice = User::find(auth('api')->user()->id)->invoices()->find($id);
+        $invoice = User::all()->find(auth('api')->user()->id)->invoices()->find($id);
         if(!$invoice){
             return response()->json([
                 'success' => false,
                 'message' => 'Desculpe, você não tem permissão de atualizar o produto de id: ' . $id
             ], 400);
         }
-        $updated = $invoice->fill($request->all())->save();
-        if($updated){
+        $request->value ? $invoice->value = $request->value : $request->value = $request->value;
+        $request->status ? $invoice->status = $request->status : $request->status = $request->status;
+        if($invoice->save()){
             return response()->json([
                 'success' => true,
                 'invoice' => $invoice
