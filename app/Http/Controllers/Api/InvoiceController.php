@@ -19,7 +19,7 @@ class InvoiceController extends Controller
     public function index()
     {
 
-        $invoices = User::find(auth('api')->user()->id)->invoices;
+        $invoices = User::find(auth('api')->user()->id)->invoices()->paginate(5);
         return response()->json($invoices);
     }
 
