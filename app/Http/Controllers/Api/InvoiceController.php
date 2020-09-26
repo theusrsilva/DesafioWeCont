@@ -31,9 +31,9 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-//        $this->validate($request, [
-//            'value' => 'required|between:1,9999.99'
-//        ]);
+        $this->validate($request, [
+            'value' => 'required|between:1,9999.99'
+        ]);
 
         $urlCount = Invoice::all()->last()->id;
         $urlCount = $urlCount +1;
