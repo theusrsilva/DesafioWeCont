@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 use Carbon\Carbon as Carbon;
 
 $factory->define(\App\Invoice::class, function (Faker $faker) {
-    $status = ['Paga',  'Aberta' , 'Atrasada'];
+    $status = ['paga',  'aberta' , 'atrasada'];
     static $id = 1;
     $expires = Carbon::now()->addDays(3); // toda fatura terá 3 dias de validade assim que criada
     $array =  [

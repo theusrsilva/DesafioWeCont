@@ -40,7 +40,7 @@ class InvoiceController extends Controller
 
         $invoice = new Invoice();
         $invoice->value = $request->value;
-        $invoice->status = 'Aberta';
+        $invoice->status = 'aberta';
         $invoice->expiration = Carbon::now()->addDays(3)->format('Y-m-d H:i:s');
         $invoice->url = 'www.desafiowecont.com/fatura/'.$urlCount;
         $invoice->user_id = auth('api')->user()->id;
@@ -50,7 +50,7 @@ class InvoiceController extends Controller
         if($invoice->save()){
             return response()->json([
                 'success' => true,
-                'product' => $invoice
+                'invoice' => $invoice
             ]);
         }else{
             return response()->json([
@@ -90,7 +90,29 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        $this->validate($request, [
+            'value' => 'between:1,9999.99',
+            'status' => 'in:aberta,paga,atrasada'
+        ]);
+        $invoice = User::find(auth('api')->user()->id)->invoices()->find($id);
+        $updated = $invoice->fill($request->all())->save();
+        if(!$invoice){
+            return response()->json([
+                'success' => false,
+                'message' => 'Desculpe, você não tem permissão de atualizar o produto de id: ' . $id
+            ], 400);
+        }
+        if($updated){
+            return response()->json([
+                'success' => true,
+                'invoice' => $invoice
+            ]);
+        }else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Desculpe, o produto não ser atualizado'
+            ], 500);
+        }
     }
 
     /**

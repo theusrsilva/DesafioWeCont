@@ -8,6 +8,8 @@ class Invoice extends Model
 {
     protected $table = 'invoices';
 
+    protected $fillable = ['status','value'];
+
     protected function serializeDate(\DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
