@@ -19,9 +19,8 @@ class UsersTableSeeder extends Seeder
             'remember_token' => Str::random(10),
             'created_at' => now(),
             'updated_at' => now()
-
         ]);
-        factory(\App\User::class,4)->create();
 
+        factory(\App\User::class,4)->create();
     }
 }

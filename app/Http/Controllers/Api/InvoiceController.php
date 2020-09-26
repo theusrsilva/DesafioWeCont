@@ -45,8 +45,6 @@ class InvoiceController extends Controller
         $invoice->url = 'www.desafiowecont.com/fatura/'.$urlCount;
         $invoice->user_id = auth('api')->user()->id;
 
-
-
         if($invoice->save()){
             return response()->json([
                 'success' => true,
@@ -69,7 +67,6 @@ class InvoiceController extends Controller
     public function show($id)
     {
         $invoice = User::find(auth('api')->user()->id)->invoices()->find($id);
-
         if (!$invoice) {
             return response()->json([
                 'success' => false,
@@ -144,6 +141,5 @@ class InvoiceController extends Controller
                 'message' => 'O produto não pode ser deletado!'
             ], 500);
         }
-
     }
 }

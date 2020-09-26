@@ -26,7 +26,7 @@ class ApiAuth extends BaseMiddleware
             }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
                 return response()->json(['status' => 'O token Expirou!']);
             }else{
-                return response()->json(['status' => 'O token não foi encontrado!']);
+                return response()->json(['status' => 'Entre para realizar esta ação!']);
             }
         }
         return $next($request);

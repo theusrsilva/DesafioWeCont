@@ -7,9 +7,11 @@ use Faker\Generator as Faker;
 use Carbon\Carbon as Carbon;
 
 $factory->define(\App\Invoice::class, function (Faker $faker) {
+
     $status = ['paga',  'aberta' , 'atrasada'];
     static $id = 1;
     $expires = Carbon::now()->addDays(3); // toda fatura terá 3 dias de validade assim que criada
+
     $array =  [
         'status' => $faker->randomElement($status),
         'url' => 'www.desafiowecont.com/fatura/'.$id,
@@ -19,6 +21,7 @@ $factory->define(\App\Invoice::class, function (Faker $faker) {
         'updated_at' => now(),
         'value' => $faker->randomFloat(2,1,9999),
     ];
+
     $id++;
     return $array;
 });

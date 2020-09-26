@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+
     /**
      * Get a JWT via given credentials.
      *
@@ -48,17 +49,6 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Você foi desconectado com sucesso!']);
     }
-
-//    /**
-//     * Refresh a token.
-//     *
-//     * @return \Illuminate\Http\JsonResponse
-//     */
-//    public function refresh()
-//    {
-//        return $this->respondWithToken(auth('api')->refresh());
-//    }
-
 
     /**
      * Get the token array structure.
@@ -119,10 +109,14 @@ class AuthController extends Controller
                 'message' => 'Desculpe, o usuário não pode ser criado'
             ], 500);
         }
-
-
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function changePassword(Request $request)
     {
         $this->validate($request, [
@@ -144,7 +138,6 @@ class AuthController extends Controller
             ], 500);
 
         }
-
     }
 
 
