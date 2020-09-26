@@ -22,4 +22,6 @@ Route::get('/',function (Request $request){
         return response()->json($welcome);
 });
 
+Route::post('auth/login', 'Api\AuthController@login')->name('login');
+
 
