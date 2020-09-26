@@ -46,15 +46,15 @@ class AuthController extends Controller
         return response()->json(['message' => 'Você foi desconectado com sucesso!']);
     }
 
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function refresh()
-    {
-        return $this->respondWithToken(auth('api')->refresh());
-    }
+//    /**
+//     * Refresh a token.
+//     *
+//     * @return \Illuminate\Http\JsonResponse
+//     */
+//    public function refresh()
+//    {
+//        return $this->respondWithToken(auth('api')->refresh());
+//    }
 
 
     /**
@@ -73,12 +73,33 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Welcome message.
+     *
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index()
     {
         $welcome = 'Bem vindo a Api do Desafio WeCont!';
-        return response()->json($welcome);
+        return response()->json(['message' => $welcome]);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+        ]);
+
+    }
 
 
 

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','Api\AuthController@index')->name('index');
 Route::post('/login', 'Api\AuthController@login')->name('login');
+Route::post('/cadastro', 'Api\AuthController@store')->name('cadastro');
 
 Route::middleware(['api.auth'])->group(function (){
 

@@ -31,9 +31,9 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'value' => 'required|between:1,9999.99'
-        ]);
+//        $this->validate($request, [
+//            'value' => 'required|between:1,9999.99'
+//        ]);
 
         $urlCount = Invoice::all()->last()->id;
         $urlCount = $urlCount +1;
@@ -90,18 +90,18 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'value' => 'between:1,9999.99',
-            'status' => 'in:aberta,paga,atrasada'
-        ]);
+//        $this->validate($request, [
+//            'value' => 'between:1,9999.99',
+//            'status' => 'in:aberta,paga,atrasada'
+//        ]);
         $invoice = User::find(auth('api')->user()->id)->invoices()->find($id);
-        $updated = $invoice->fill($request->all())->save();
         if(!$invoice){
             return response()->json([
                 'success' => false,
                 'message' => 'Desculpe, você não tem permissão de atualizar o produto de id: ' . $id
             ], 400);
         }
+        $updated = $invoice->fill($request->all())->save();
         if($updated){
             return response()->json([
                 'success' => true,
