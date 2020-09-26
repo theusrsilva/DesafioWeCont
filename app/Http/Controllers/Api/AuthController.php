@@ -31,7 +31,6 @@ class AuthController extends Controller
      */
     public function info()
     {
-
         return response()->json(auth('api')->user());
     }
 
@@ -44,7 +43,7 @@ class AuthController extends Controller
     {
         auth('api')->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Você foi desconectado com sucesso!']);
     }
 
     /**

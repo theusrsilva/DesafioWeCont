@@ -20,6 +20,7 @@ class CreateInvoicesTable extends Migration
             $table->string('url');
             $table->timestamps();
             $table->dateTime('expiration');
+            $table->decimal('value',6,2);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

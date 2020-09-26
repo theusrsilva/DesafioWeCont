@@ -18,6 +18,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','Api\AuthController@index')->name('index');
 Route::post('/login', 'Api\AuthController@login')->name('login');
 
+Route::middleware(['api.auth'])->group(function (){
+
+    Route::apiResource('/fatura','Api\InvoiceController');
+    Route::post('/info','Api\AuthController@info')->name('info');
+    Route::post('/logout','Api\AuthController@logout')->name('logout');
+
+});
+
+
+
 
 
 
