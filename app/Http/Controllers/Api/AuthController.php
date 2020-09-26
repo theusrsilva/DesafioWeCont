@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -93,11 +96,29 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-        ]);
+//        $this->validate($request, [
+//            'name' => 'required',
+//            'email' => 'required|email|unique:users',
+//            'password' => 'required',
+//        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->remember_token = Str::random(10);
+        $user->email_verified_at = Carbon::now()->format('Y-m-d H:i:s');
+        $user->password = Hash::make($request->password);
+
+        if($user->save()){
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+        }else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Desculpe, o usuário não pode ser criado'
+            ], 500);
+        }
 
     }
 

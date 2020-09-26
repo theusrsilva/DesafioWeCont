@@ -90,10 +90,10 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        $this->validate($request, [
-//            'value' => 'between:1,9999.99',
-//            'status' => 'in:aberta,paga,atrasada'
-//        ]);
+        $this->validate($request, [
+            'value' => 'between:1,9999.99',
+            'status' => 'in:aberta,paga,atrasada'
+        ]);
         $invoice = User::find(auth('api')->user()->id)->invoices()->find($id);
         if(!$invoice){
             return response()->json([
