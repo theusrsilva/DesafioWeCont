@@ -21,6 +21,7 @@ Route::post('/cadastro', 'Api\AuthController@store')->name('cadastro');
 
 Route::middleware(['api.auth'])->group(function (){
 
+    Route::post('/senha', 'Api\AuthController@changePassword')->name('senha');
     Route::apiResource('/fatura','Api\InvoiceController');
     Route::post('/info','Api\AuthController@info')->name('info');
     Route::post('/logout','Api\AuthController@logout')->name('logout');

@@ -120,8 +120,32 @@ class AuthController extends Controller
             ], 500);
         }
 
+
     }
 
+    public function changePassword(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required',
+            'last_password' => 'required',
+        ]);
+        $user = User::find(auth('api')->user()->id);
+        if(Hash::check($request->last_password, $user->password)){
+            $user->password = Hash::make($request->password);
+            $user->save();
+            return response()->json([
+                'success' => true,
+                'message' => 'Senha alterada com sucesso'
+            ]);
+        }else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Senha inválida!'
+            ], 500);
+
+        }
+
+    }
 
 
 }
