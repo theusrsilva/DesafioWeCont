@@ -1,78 +1,284 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Desafio Wecont
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Api de gerenciamento de faturas feita para o desafio da empre WeCont.
 
-## About Laravel
+A aplicação foi feita toda utilizando laravel, Jwt e mysql.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Características do sistema
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* Autenticação de Usuário
+* Só usuários logados na api podem alterar e ver suas faturas
+* Paginação de faturas em 5 por página
+* Data de validade da fatura para 3 dias depois de sua criação]
+* O sistema possui seeds para alimentar o banco e facilitar os testes
+* Validation de campos recebidos
+* CRUD de faturas
+* Tradução
+* Rotas protegidas por autenticação
+* MVC
+* Só retorna apenas nome e e-mail dos usuários quando acessado a rota /api/info
+* Todo retorno em JSON
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Instalação Unix
+    
+    git clone https://github.com/theusrsilva/DesafioWeCont.git
+    composer install
+    cp .env.example .env
+    php artisan key:generate
+    php artisan jwt:secret
+    
+## Instalação Windows
+    
+    git clone https://github.com/theusrsilva/DesafioWeCont.git
+    composer install
+    será necessário copiar e colar o .env.example no mesmo lugar com o nome de .env
+    php artisan key:generate
+    php artisan jwt:secret
+    
 
-## Learning Laravel
+## Rodando o APP
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    Recomendo o uso de programas com o Xampp para iniciar seu banco de dados local
+    Após isso crie uma base de dados com o nome que desejar e informe ela e as demais informações para coexão com seu banco de dados
+    php artisan migrate (--seed) caso queira o banco alimentado com dados ficticios utilize o "--seed"
+    php artisan serve
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Utilização
 
-## Laravel Sponsors
+    Para poder testar a API recomendo o uso do aplicativo Postman para poder acessar todas as rotas
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+# Lista de rotas
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+## Bem-Vindo
 
-## Contributing
+### Request
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+`GET /api/`
 
-## Code of Conduct
+### Response
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   {
+    "message": "Bem vindo a Api do Desafio WeCont!"
+    }
 
-## Security Vulnerabilities
+## Cadastro
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Request
 
-## License
+`POST /api/cadastro`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Response
+
+    {
+    "success": true,
+    "user": {
+        "name": "matheus",
+        "email": "emai333l@email.com"
+    }
+    }
+
+## Login
+
+### Request
+
+`GET /api/login`
+
+### Response
+
+    {
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYwMTE1MTk5NSwiZXhwIjoxNjAxMTU1NTk1LCJuYmYiOjE2MDExNTE5OTUsImp0aSI6InpDZG9qY2JBWmxpUWNzcm0iLCJzdWIiOjksInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.jAKubrBderoHB7ArPUba2spEepOMYr6ZySaXuCokUno",
+    "token_type": "bearer",
+    "expires_in": 3600
+    }
+
+## Informações do Usuário Logado (AUTH)
+
+### Request
+
+`POST /api/info`
+
+
+### Response
+
+    {
+    "name": "teste api",
+    "email": "teste2@teste.com"
+    }
+
+## Troca Senha(AUTH)
+
+### Request
+
+`POST /api/senha`
+
+### Response
+
+    {
+    "success": true,
+    "message": "Senha alterada com sucesso"
+    }
+
+
+### Criar fatura(AUTH)
+
+### Request
+
+`POST /api/fatura`
+
+
+### Response
+
+    {
+    "success": true,
+    "invoice": {
+        "value": "1234.56",
+        "status": "aberta",
+        "expiration": "2020-09-29 17:36:12",
+        "url": "www.desafiowecont.com/fatura/51",
+        "user_id": 9,
+        "updated_at": "2020-09-26 17:36:12",
+        "created_at": "2020-09-26 17:36:12",
+        "id": 51
+    }
+    }
+
+
+## Lista de faturas do usuário autenticado (AUTH)
+
+### Request
+
+`GET /api/fatura`
+
+### Response
+
+    {
+    "current_page": 1,
+    "data": [
+        {
+            "id": 7,
+            "user_id": 9,
+            "status": "pag",
+            "url": "www.desafiowecont.com/fatura/7",
+            "created_at": "2020-09-26 01:49:23",
+            "updated_at": "2020-09-26 15:30:12",
+            "expiration": "2020-09-29 01:49:23",
+            "value": "9273.66"
+        },
+        {
+            "id": 10,
+            "user_id": 9,
+            "status": "atrasada",
+            "url": "www.desafiowecont.com/fatura/10",
+            "created_at": "2020-09-26 01:49:23",
+            "updated_at": "2020-09-26 01:49:23",
+            "expiration": "2020-09-29 01:49:23",
+            "value": "450.95"
+        },
+        {
+            "id": 13,
+            "user_id": 9,
+            "status": "paga",
+            "url": "www.desafiowecont.com/fatura/13",
+            "created_at": "2020-09-26 01:49:23",
+            "updated_at": "2020-09-26 01:49:23",
+            "expiration": "2020-09-29 01:49:23",
+            "value": "9790.26"
+        },
+        {
+            "id": 21,
+            "user_id": 9,
+            "status": "aberta",
+            "url": "www.desafiowecont.com/fatura/21",
+            "created_at": "2020-09-26 01:49:23",
+            "updated_at": "2020-09-26 01:49:23",
+            "expiration": "2020-09-29 01:49:23",
+            "value": "9454.93"
+        },
+        {
+            "id": 22,
+            "user_id": 9,
+            "status": "aberta",
+            "url": "www.desafiowecont.com/fatura/22",
+            "created_at": "2020-09-26 01:49:23",
+            "updated_at": "2020-09-26 01:49:23",
+            "expiration": "2020-09-29 01:49:23",
+            "value": "8863.72"
+        }
+    ],
+    "first_page_url": "http://127.0.0.1:8000/api/fatura?page=1",
+    "from": 1,
+    "last_page": 3,
+    "last_page_url": "http://127.0.0.1:8000/api/fatura?page=3",
+    "next_page_url": "http://127.0.0.1:8000/api/fatura?page=2",
+    "path": "http://127.0.0.1:8000/api/fatura",
+    "per_page": 5,
+    "prev_page_url": null,
+    "to": 5,
+    "total": 14
+    }
+
+## Mostrar uma fatura específica(AUTH)
+
+### Request
+
+`GET /api/fatura/{id}`
+
+### Response
+
+    {
+    "id": 21,
+    "user_id": 9,
+    "status": "aberta",
+    "url": "www.desafiowecont.com/fatura/21",
+    "created_at": "2020-09-26 01:49:23",
+    "updated_at": "2020-09-26 01:49:23",
+    "expiration": "2020-09-29 01:49:23",
+    "value": "9454.93"
+    }
+
+## Atualizar uma fatura(AUTH)
+
+### Request
+
+`PUT /api/fatura/{id}`
+
+### Response
+
+    {
+    "success": true,
+    "invoice": {
+        "id": 7,
+        "user_id": 9,
+        "status": "paga",
+        "url": "www.desafiowecont.com/fatura/7",
+        "created_at": "2020-09-26 01:49:23",
+        "updated_at": "2020-09-26 15:30:12",
+        "expiration": "2020-09-29 01:49:23",
+        "value": "9999.99"
+    }
+    }
+
+## Apagar uma fatura(AUTH)
+
+### Request
+
+`DELETE /api/fatura/{id}`
+
+### Response
+
+    {
+    "success": true,
+    "message": "O produto foi deletado!"
+    }
+
+## Logout(AUTH)
+
+### Request
+
+`POST /api/logout`
+
+### Response
+
+    {
+    "message": "Você foi desconectado com sucesso!"
+    }
